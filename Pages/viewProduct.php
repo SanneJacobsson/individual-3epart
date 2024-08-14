@@ -9,6 +9,35 @@ $id = $_GET['id'] ?? "";
 $content = file_get_contents("http://localhost:3000/products/$id");
 $product = json_decode($content);
 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $url = "http://localhost:3000/products/$id";
+
+    $data = [
+        'name' => $_POST['name'],
+        'price' => $_POST['price']
+    ];
+
+    $ch = curl_init($url);
+
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    } else {
+        echo 'Response:' . $response;
+    }
+
+    curl_close($ch);
+    $content = file_get_contents("http://localhost:3000/products/$id");
+    $product = json_decode($content);
+}
+
 layoutHead();
 
 ?>
@@ -23,6 +52,14 @@ layoutHead();
                 <!-- Det funakr inte att visa den specifika kategorin? -->
                 <h2><?php echo $product->name; ?></h2>
                 <p>Price: <?php echo $product->price; ?> SEK</p>
+                <form method="post">
+                    <h5>Updatera produkt</h5>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name"><br><br>
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
             </div>
         </section>
     </main>

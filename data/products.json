@@ -1,57 +1,57 @@
 [
   {
     "id": 1,
-    "name": "Product 1",
-    "price": 10.99
+    "name": "Inception",
+    "price": 141
   },
   {
     "id": 2,
-    "name": "Product 2",
-    "price": 20.49
+    "name": "The Matrix",
+    "price": 109
   },
   {
     "id": 3,
-    "name": "Product 3",
-    "price": 15.75
+    "name": "Interstellar",
+    "price": 163
   },
   {
     "id": 4,
-    "name": "Product 4",
-    "price": 8.99
+    "name": "The Dark Knight",
+    "price": 131
   },
   {
     "id": 5,
-    "name": "Product 5",
-    "price": 12.99
+    "name": "Forrest Gump",
+    "price": 98
   },
   {
     "id": 6,
-    "name": "Product 6",
-    "price": 25.99
+    "name": "The Shawshank Redemption",
+    "price": 120
   },
   {
     "id": 7,
-    "name": "Product 7",
-    "price": 18.49
+    "name": "Pulp Fiction",
+    "price": 87
   },
   {
     "id": 8,
-    "name": "Product 8",
-    "price": 30
+    "name": "The Godfather",
+    "price": 152
   },
   {
     "id": 9,
-    "name": "Product 9",
-    "price": 5.99
+    "name": "The Lord of the Rings: The Fellowship of the Ring",
+    "price": 174
   },
   {
     "id": 10,
-    "name": "Product 10",
-    "price": 22.99
+    "name": "Fight Club",
+    "price": 103
   },
   {
     "id": 11,
-    "name": "Test product from Postamn",
-    "price": 9999
+    "name": "Star Wars: Episode IV - A New Hope",
+    "price": 158
   }
 ]

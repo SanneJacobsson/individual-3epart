@@ -1,54 +1,26 @@
 <?php
-$ch = curl_init();
-$url = "http://localhost:3000/products";
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$headers = [
-    "Content-Type: application/json"
-];
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+// globala initieringar !
+require_once(dirname(__FILE__) . "/Utils/Router.php");
 
-$response = curl_exec($ch);
+// $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+// $dotenv->load();
 
-if (curl_errno($ch)) {
-    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    echo 'cURL Error: ' . curl_error($ch);
-} else {
-    //  header('Content-type: text/csv');
+$router = new Router();
+$router->addRoute('/', function () {
+    require __DIR__ . '/Pages/index.php';
+});
 
-    $data = json_decode($response, true);
+$router->addRoute('/allproducts', function () {
+    require __DIR__ . '/Pages/allproducts.php';
+});
 
-    foreach ($data as $row) {
-        echo ($row['id'] . "," . $row['name'] . "," . $row['price'] . "\n");
-    }
-}
+$router->addRoute('/category', function () {
+    require __DIR__ . '/Pages/category.php';
+});
 
-curl_close($ch);
+$router->addRoute('/viewproduct', function () {
+    require __DIR__ . '/Pages/viewproduct.php';
+});
 
-$content = file_get_contents("http://localhost:3000/products");
-$result = json_decode($content);
+$router->dispatch();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Movies</title>
-</head>
-
-<body>
-    <main>
-        <table>
-
-            <?php
-            foreach ($result as $row) {
-                echo "<tr><td>$row->id</td><td>$row->name</td><td>$row->price SEK</td></tr>";
-            }
-            ?>
-
-        </table>
-    </main>
-</body>

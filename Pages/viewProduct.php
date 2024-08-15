@@ -13,32 +13,56 @@ $product = json_decode($content);
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['update'])) {
 
-    $url = "http://localhost:3000/products/$id";
+        $url = "http://localhost:3000/products/$id";
 
-    $data = [
-        'name' => $_POST['name'],
-        'price' => $_POST['price']
-    ];
+        $data = [
+            'name' => $_POST['name'],
+            'price' => $_POST['price']
+        ];
 
-    $ch = curl_init($url);
+        $ch = curl_init($url);
 
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    $response = curl_exec($ch);
+        $response = curl_exec($ch);
 
-    if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-    } else {
-        echo 'Response:' . $response;
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        } else {
+            echo 'Response:' . $response;
+        }
+
+        curl_close($ch);
+        $content = file_get_contents("http://localhost:3000/products/$id");
+        $product = json_decode($content);
+    } else if (isset($_POST['delete'])) {
+
+        $url = "http://localhost:3000/products/$id";
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        } else {
+            echo 'Response:' . $response;
+        }
+
+        curl_close($ch);
+
+        header("Location: /");
+        exit();
+
     }
-
-    curl_close($ch);
-    $content = file_get_contents("http://localhost:3000/products/$id");
-    $product = json_decode($content);
 }
 
 layoutHead();
@@ -62,7 +86,11 @@ layoutHead();
                     <label for="price">Price:</label>
                     <input type="text" id="price" name="price"
                         value="<?php echo htmlspecialchars($product->price); ?>"><br><br>
-                    <input type="submit" value="Submit">
+                    <input type="submit" name="update" value="Submit">
+                </form>
+                <form method="post" style="margin-top: 20px;">
+                    <input type="hidden" name="delete" value="true">
+                    <input type="submit" value="Delete Product" style="background-color: red; color: white;">
                 </form>
             </div>
         </section>

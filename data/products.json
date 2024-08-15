@@ -1,10 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Inception",
-    "price": 141
-  },
-  {
     "id": 2,
     "name": "The Matrix",
     "price": 109
@@ -18,11 +13,6 @@
     "id": 4,
     "name": "The Dark Knight",
     "price": 131
-  },
-  {
-    "id": 5,
-    "name": "Skog Gump",
-    "price": "100"
   },
   {
     "id": 6,

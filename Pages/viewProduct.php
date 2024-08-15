@@ -1,5 +1,7 @@
 <?php
 
+//Kolla hur göra med if-satsen nedan
+
 require_once("Pages/layout/head.php");
 require_once("Pages/layout/header.php");
 require_once("Pages/layout/footer.php");

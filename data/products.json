@@ -21,8 +21,8 @@
   },
   {
     "id": 5,
-    "name": "Forrest Gump",
-    "price": 98
+    "name": "Skog Gump",
+    "price": "100"
   },
   {
     "id": 6,

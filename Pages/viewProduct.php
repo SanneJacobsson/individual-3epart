@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ch = curl_init($url);
 
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     $response = curl_exec($ch);
@@ -49,28 +50,28 @@ layoutHead();
     <main>
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <!-- Det funakr inte att visa den specifika kategorin? -->
-                <h2><?php echo $product->name; ?></h2>
-                <p>Price: <?php echo $product->price; ?> SEK</p>
+                <h2><?php echo htmlspecialchars($product->name); ?></h2>
+                <p>Price: <?php echo htmlspecialchars($product->price); ?> SEK</p>
                 <form method="post">
-                    <h5>Updatera produkt</h5>
+                    <h5>Update Product</h5>
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name"><br><br>
+                    <input type="text" id="name" name="name"
+                        value="<?php echo htmlspecialchars($product->name); ?>"><br><br>
                     <label for="price">Price:</label>
-                    <input type="text" id="price" name="price"><br><br>
+                    <input type="text" id="price" name="price"
+                        value="<?php echo htmlspecialchars($product->price); ?>"><br><br>
                     <input type="submit" value="Submit">
                 </form>
             </div>
         </section>
     </main>
-    <!-- Footer-->
     <?php
     layoutFooter();
     ?>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <!-- <script src="js/scripts.js"></script> -->
 </body>
 
 </html>

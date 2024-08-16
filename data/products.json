@@ -21,7 +21,7 @@
   },
   {
     "id": 7,
-    "name": "Pulp Reality",
+    "name": "Pulp Fiction",
     "price": "100"
   },
   {
@@ -43,5 +43,15 @@
     "id": 11,
     "name": "Star Wars: Episode IV - A New Hope",
     "price": 158
+  },
+  {
+    "id": 12,
+    "name": "Jaws",
+    "price": 130
+  },
+  {
+    "id": 13,
+    "name": "The Piano",
+    "price": 160
   }
 ]

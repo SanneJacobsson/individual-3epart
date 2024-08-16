@@ -28,13 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
 
     if (curl_errno($ch)) {
         echo 'Error:' . curl_error($ch);
-    } else {
-        echo 'Response:' . $response;
+        exit();
     }
 
     curl_close($ch);
-    // header("Location: /");
-    // exit();
+    header("Location: /");
+    exit();
 }
 
 layoutHead();

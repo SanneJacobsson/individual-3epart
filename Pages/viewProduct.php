@@ -1,7 +1,5 @@
 <?php
 
-//Kolla hur göra med if-satsen nedan
-
 require_once("Pages/layout/head.php");
 require_once("Pages/layout/header.php");
 require_once("Pages/layout/footer.php");
@@ -34,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
-        } else {
-            echo 'Response:' . $response;
+            exit();
         }
 
         curl_close($ch);
@@ -54,8 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
-        } else {
-            echo 'Response:' . $response;
+            exit();
         }
 
         curl_close($ch);

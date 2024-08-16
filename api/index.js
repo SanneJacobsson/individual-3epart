@@ -3,31 +3,25 @@ const dotenv = require("dotenv");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const path = require("path");
-// const fetch = require('node-fetch');
 const app = express();
 app.use(express.json());
 
 dotenv.config();
 
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Load initial product data
 const dataFilePath = path.join(__dirname, "../data/products.json");
 let products = JSON.parse(fs.readFileSync(dataFilePath));
 
-// Helper function to get the next product ID
 const getNextId = () => {
   const ids = products.map((product) => product.id);
   return Math.max(...ids) + 1;
 };
 
-// Get all products
 app.get("/products", (req, res) => {
   res.json(products);
 });
 
-// Get a single product by ID
 app.get("/products/:id", (req, res) => {
   const productId = req.params.id;
   const product = products.find((p) => p.id === parseInt(productId));
@@ -38,7 +32,6 @@ app.get("/products/:id", (req, res) => {
   }
 });
 
-// Add a new product
 app.post("/products", (req, res) => {
   const { name, price } = req.body;
   if (!name || typeof price !== "number") {
@@ -56,7 +49,6 @@ app.post("/products", (req, res) => {
   res.status(201).json(newProduct);
 });
 
-// Update a product by ID
 app.put("/products/:id", (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
@@ -70,7 +62,6 @@ app.put("/products/:id", (req, res) => {
   }
 });
 
-// Delete a product by ID
 app.delete("/products/:id", (req, res) => {
   const productId = req.params.id;
   const index = products.findIndex((p) => p.id === parseInt(productId));

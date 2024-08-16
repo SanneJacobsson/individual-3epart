@@ -1,5 +1,5 @@
 <?php
-// globala initieringar !
+
 require_once(dirname(__FILE__) . "/Utils/Router.php");
 
 // $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
@@ -7,19 +7,15 @@ require_once(dirname(__FILE__) . "/Utils/Router.php");
 
 $router = new Router();
 $router->addRoute('/', function () {
-    require __DIR__ . '/Pages/index.php';
+    require __DIR__ . '/Pages/main.php';
 });
 
-$router->addRoute('/allproducts', function () {
-    require __DIR__ . '/Pages/allproducts.php';
-});
-
-$router->addRoute('/category', function () {
-    require __DIR__ . '/Pages/category.php';
+$router->addRoute('/addproduct', function () {
+    require __DIR__ . '/Pages/addProduct.php';
 });
 
 $router->addRoute('/viewproduct', function () {
-    require __DIR__ . '/Pages/viewproduct.php';
+    require __DIR__ . '/Pages/viewProduct.php';
 });
 
 $router->dispatch();

@@ -5,6 +5,7 @@
 require_once("Pages/layout/head.php");
 require_once("Pages/layout/header.php");
 require_once("Pages/layout/footer.php");
+require_once("Pages/layout/navigation.php");
 
 $id = $_GET['id'] ?? "";
 
@@ -71,7 +72,7 @@ layoutHead();
 
 <body>
     <?php
-    layoutHeader();
+    layoutNavigation();
     ?>
     <main>
         <section class="py-5">
